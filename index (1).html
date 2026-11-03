@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f5c5a">
+<title>Margaret Manager — Rental Care</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="appbar no-print">
+  <div class="apptitle">
+    <h1>🏡 Margaret Manager</h1>
+    <p id="subline"></p>
+    <button id="syncChip" class="syncchip" data-s="off" onclick="chipTap()" title="Google Drive sync status">
+      <span class="dot"></span><span id="syncTxt">Set up sync</span>
+    </button>
+  </div>
+  <div class="hdr-actions">
+    <button onclick="openHistory()" title="Restore an earlier version">🕘</button>
+    <button onclick="openDrive()" title="Sync &amp; backup (Google Drive)">☁️</button>
+    <button onclick="exportData()" title="Save a full backup file on this device">💾</button>
+    <button onclick="document.getElementById('importFile').click()" title="Load a backup file">📥</button>
+    <input type="file" id="importFile" accept=".json,.html" hidden onchange="importData(event)">
+  </div>
+</header>
+
+<nav class="tabbar no-print" id="tabbar">
+  <button data-v="dashboard" class="active" onclick="go('dashboard')"><span class="ic">🏠</span><span>Home</span></button>
+  <button data-v="overdue" onclick="go('overdue')"><span class="ic">🔔</span><span>Owed</span></button>
+  <button data-v="statements" onclick="go('statements')"><span class="ic">📄</span><span>Statements</span></button>
+  <button data-v="archive" onclick="go('archive')"><span class="ic">🗂️</span><span>Former</span></button>
+  <button data-v="mpesa" onclick="go('mpesa')"><span class="ic">📱</span><span>M-Pesa</span></button>
+</nav>
+
+<main>
+  <section id="view-dashboard" class="view active"></section>
+  <section id="view-overdue" class="view"></section>
+  <section id="view-statements" class="view"></section>
+  <section id="view-archive" class="view"></section>
+  <section id="view-mpesa" class="view"></section>
+</main>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="sheet" id="sheet"></div>
+</div>
+<div id="printArea"></div>
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
